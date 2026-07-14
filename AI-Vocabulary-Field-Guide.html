@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Vocabulary Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F7;
+  --card:#FFFFFF;
+  --ink:#16202C;
+  --muted:#5A6673;
+  --teal:#0F6B66;
+  --teal-soft:#E1EEEC;
+  --amber:#E39B2D;
+  --amber-soft:#FBF0DC;
+  --blue:#4E7DC4;
+  --blue-soft:#E4ECF7;
+  --line:#D8DEE4;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Public Sans',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+
+/* ---------- Hero ---------- */
+header{
+  padding:64px 0 48px;
+  border-bottom:2px solid var(--ink);
+}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:14px;
+}
+h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;
+  font-size:clamp(2.2rem,5.4vw,3.6rem);
+  line-height:1.05;
+  letter-spacing:-.01em;
+  max-width:14ch;
+}
+.hero-sub{
+  margin-top:18px;
+  max-width:52ch;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.legend{
+  margin-top:22px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.legend span{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  padding:5px 11px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--card);
+}
+
+/* ---------- TOC ---------- */
+nav.toc{
+  padding:26px 0;
+  border-bottom:1px solid var(--line);
+}
+nav.toc ol{
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:6px 24px;
+  counter-reset:toc;
+}
+nav.toc a{
+  counter-increment:toc;
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  text-decoration:none;
+  color:var(--ink);
+  font-size:.92rem;
+  padding:4px 0;
+}
+nav.toc a::before{
+  content:counter(toc,decimal-leading-zero);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  color:var(--amber);
+}
+nav.toc a:hover{color:var(--teal)}
+
+/* ---------- Sections ---------- */
+section{padding:56px 0 8px}
+.section-head{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:8px;
+}
+.section-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  color:var(--amber);
+  letter-spacing:.08em;
+}
+h2{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800;
+  font-size:clamp(1.5rem,3vw,2rem);
+  letter-spacing:-.01em;
+}
+.section-intro{
+  color:var(--muted);
+  max-width:60ch;
+  margin-bottom:26px;
+}
+
+/* ---------- Term cards ---------- */
+.terms{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:12px;
+  margin-bottom:28px;
+}
+.term{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px 18px;
+}
+.term b{
+  display:block;
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:600;
+  font-size:.85rem;
+  color:var(--teal);
+  margin-bottom:6px;
+}
+.term p{font-size:.93rem;color:#2A3542}
+
+/* ---------- Figures ---------- */
+figure{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px 22px 16px;
+  margin:0 0 28px;
+}
+figure svg{display:block;width:100%;height:auto}
+figcaption{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;
+  color:var(--muted);
+  text-align:center;
+  margin-top:12px;
+  letter-spacing:.04em;
+}
+
+/* ---------- Quiz ---------- */
+.quiz{
+  border-left:4px solid var(--amber);
+  background:var(--amber-soft);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:18px 20px;
+  margin-bottom:20px;
+}
+.quiz .q-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#9A6A12;
+  margin-bottom:6px;
+}
+.quiz p.q{font-weight:600;margin-bottom:10px}
+.quiz details summary{
+  cursor:pointer;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  color:var(--teal);
+  user-select:none;
+}
+.quiz details summary:hover{text-decoration:underline}
+.quiz details[open] summary{margin-bottom:8px}
+.quiz .answer{
+  background:var(--card);
+  border:1px solid #EAD9B4;
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:.93rem;
+}
+.quiz .answer b{color:var(--teal)}
+
+/* ---------- Footer ---------- */
+footer{
+  margin-top:56px;
+  padding:32px 0 48px;
+  border-top:2px solid var(--ink);
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:1fr}
+  header{padding:44px 0 36px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Study guide · 12 chapters · 90+ terms</div>
+      <h1>The AI Vocabulary Field Guide</h1>
+      <p class="hero-sub">From the four nested core concepts to the frontier of emergent abilities — every term explained in one line, with diagrams where a picture beats a paragraph, and answers to every "Test yourself" question.</p>
+      <div class="legend">
+        <span>■ Definitions</span>
+        <span>■ Diagrams</span>
+        <span>■ Quiz answers</span>
+      </div>
+    </div>
+    <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nested circles showing AI contains ML contains Deep Learning contains Neural Networks">
+      <circle cx="180" cy="180" r="168" fill="#E1EEEC" stroke="#0F6B66" stroke-width="2"/>
+      <circle cx="180" cy="196" r="128" fill="#E4ECF7" stroke="#4E7DC4" stroke-width="2"/>
+      <circle cx="180" cy="216" r="90" fill="#FBF0DC" stroke="#E39B2D" stroke-width="2"/>
+      <circle cx="180" cy="238" r="52" fill="#FFFFFF" stroke="#16202C" stroke-width="2"/>
+      <text x="180" y="48" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="600" fill="#0F6B66">ARTIFICIAL INTELLIGENCE</text>
+      <text x="180" y="106" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#3D66A8">MACHINE LEARNING</text>
+      <text x="180" y="162" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#B87A15">DEEP LEARNING</text>
+      <text x="180" y="234" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="#16202C">NEURAL</text>
+      <text x="180" y="250" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="#16202C">NETWORKS</text>
+    </svg>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <ol>
+      <li><a href="#core">Core Concepts</a></li>
+      <li><a href="#learn">How Models Learn</a></li>
+      <li><a href="#arch">Architecture &amp; Training</a></li>
+      <li><a href="#genai">Generative AI</a></li>
+      <li><a href="#agents">AI Agents &amp; Systems</a></li>
+      <li><a href="#nlp">NLP &amp; Language</a></li>
+      <li><a href="#vision">Vision &amp; Multimodal</a></li>
+      <li><a href="#wrong">What Can Go Wrong</a></li>
+      <li><a href="#eval">Evaluation &amp; Metrics</a></li>
+      <li><a href="#safety">Safety &amp; Ethics</a></li>
+      <li><a href="#infra">Infrastructure &amp; Deployment</a></li>
+      <li><a href="#advanced">Advanced Concepts</a></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ============ 01 CORE ============ -->
+<section id="core">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">01</span><h2>Core Concepts</h2></div>
+    <p class="section-intro">These four nest inside each other like Russian dolls — exactly as the hero diagram above shows. Get these right and everything else clicks faster.</p>
+    <div class="terms">
+      <div class="term"><b>Artificial Intelligence (AI)</b><p>Systems that do things that normally need a human brain: reasoning, learning, deciding.</p></div>
+      <div class="term"><b>Machine Learning (ML)</b><p>A type of AI that learns patterns from data instead of following step-by-step rules.</p></div>
+      <div class="term"><b>Deep Learning (DL)</b><p>ML that uses many layers of neural networks to learn complex things from huge datasets.</p></div>
+      <div class="term"><b>Neural Network</b><p>Connected nodes (like brain cells) organised in layers that process information.</p></div>
+    </div>
+    <div class="quiz">
+      <div class="q-label">Test yourself</div>
+      <p class="q">Is every ML system also AI, or is every AI system also ML?</p>
+      <details><summary>Show answer</summary>
+        <div class="answer"><b>Every ML system is AI — but not every AI system is ML.</b> ML sits inside AI (see the nested circles). A classic chess engine or a rule-based expert system is AI without any learning: it follows hand-written rules, so it isn't ML.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 HOW MODELS LEARN ============ -->
+<section id="learn">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">02</span><h2>How Models Learn</h2></div>
+    <p class="section-intro">The method depends on what kind of data you have.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four learning paradigms: supervised, unsupervised, reinforcement, self-supervised">
+        <!-- Supervised -->
+        <rect x="10" y="10" width="205" height="230" rx="12" fill="#FFFFFF" stroke="#D8DEE4"/>
+        <text x="112" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#0F6B66">SUPERVISED</text>
+        <circle cx="60" cy="90" r="10" fill="#0F6B66"/><text x="80" y="94" font-family="Public Sans" font-size="12" fill="#16202C">"cat"</text>
+        <circle cx="60" cy="125" r="10" fill="#E39B2D"/><text x="80" y="129" font-family="Public Sans" font-size="12" fill="#16202C">"dog"</text>
+        <circle cx="60" cy="160" r="10" fill="#0F6B66"/><text x="80" y="164" font-family="Public Sans" font-size="12" fill="#16202C">"cat"</text>
+        <text x="112" y="215" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">every example is labelled</text>
+        <!-- Unsupervised -->
+        <rect x="235" y="10" width="205" height="230" rx="12" fill="#FFFFFF" stroke="#D8DEE4"/>
+        <text x="337" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#4E7DC4">UNSUPERVISED</text>
+        <circle cx="295" cy="95" r="8" fill="#4E7DC4"/><circle cx="315" cy="110" r="8" fill="#4E7DC4"/><circle cx="300" cy="125" r="8" fill="#4E7DC4"/>
+        <circle cx="380" cy="140" r="8" fill="#94A9C9"/><circle cx="398" cy="158" r="8" fill="#94A9C9"/><circle cx="375" cy="165" r="8" fill="#94A9C9"/>
+        <ellipse cx="303" cy="110" rx="34" ry="32" fill="none" stroke="#4E7DC4" stroke-dasharray="4 4"/>
+        <ellipse cx="385" cy="153" rx="34" ry="30" fill="none" stroke="#94A9C9" stroke-dasharray="4 4"/>
+        <text x="337" y="215" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">no labels — finds clusters itself</text>
+        <!-- Reinforcement -->
+        <rect x="460" y="10" width="205" height="230" rx="12" fill="#FFFFFF" stroke="#D8DEE4"/>
+        <text x="562" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#E39B2D">REINFORCEMENT</text>
+        <rect x="505" y="70" width="115" height="34" rx="8" fill="#FBF0DC" stroke="#E39B2D"/>
+        <text x="562" y="92" text-anchor="middle" font-family="Public Sans" font-size="12" fill="#16202C">Agent acts</text>
+        <rect x="505" y="145" width="115" height="34" rx="8" fill="#E1EEEC" stroke="#0F6B66"/>
+        <text x="562" y="167" text-anchor="middle" font-family="Public Sans" font-size="12" fill="#16202C">Reward / penalty</text>
+        <path d="M600 104 C 640 112, 640 137, 600 145" fill="none" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow)"/>
+        <path d="M525 145 C 485 137, 485 112, 525 104" fill="none" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow)"/>
+        <text x="562" y="215" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">trial and error loop</text>
+        <!-- Self-supervised -->
+        <rect x="685" y="10" width="205" height="230" rx="12" fill="#FFFFFF" stroke="#D8DEE4"/>
+        <text x="787" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#16202C">SELF-SUPERVISED</text>
+        <text x="787" y="105" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="#16202C">The cat sat on</text>
+        <rect x="757" y="120" width="60" height="24" rx="6" fill="#16202C"/>
+        <text x="787" y="137" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#FFFFFF">the ?</text>
+        <text x="787" y="175" text-anchor="middle" font-family="Public Sans" font-size="12" fill="#0F6B66">predicts: "mat"</text>
+        <text x="787" y="215" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">makes its own labels from data</text>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="#16202C"/>
+          </marker>
+        </defs>
+      </svg>
+      <figcaption>FIG. 1 — THE FOUR LEARNING PARADIGMS AT A GLANCE</figcaption>
+    </figure>
+
+    <div class="terms">
+      <div class="term"><b>Supervised Learning</b><p>You give it labelled examples ("this is a cat, this is a dog") and it learns the pattern.</p></div>
+      <div class="term"><b>Unsupervised Learning</b><p>No labels. The model finds hidden patterns on its own.</p></div>
+      <div class="term"><b>Reinforcement Learning (RL)</b><p>Trial and error. Rewards for good moves, penalties for bad ones.</p></div>
+      <div class="term"><b>Self-Supervised Learning</b><p>The model makes its own labels from the data (like hiding a word and predicting it).</p></div>
+      <div class="term"><b>Transfer Learning</b><p>Take what a model learned on one task and apply it to a different one.</p></div>
+      <div class="term"><b>Fine-Tuning</b><p>Take a pre-trained model and train it a bit more on your specific task.</p></div>
+      <div class="term"><b>Zero-Shot Learning</b><p>The model does a task it was never trained on. No examples needed.</p></div>
+      <div class="term"><b>Few-Shot Learning</b><p>You give it 1 to 10 examples and it figures out the pattern.</p></div>
+      <div class="term"><b>RLHF</b><p>Reinforcement Learning from Human Feedback. Humans rate outputs, model learns what people prefer.</p></div>
+    </div>
+    <div class="quiz">
+      <div class="q-label">Test yourself</div>
+      <p class="q">ChatGPT summarises a legal contract it was never trained on. Zero-shot or few-shot?</p>
+      <details><summary>Show answer</summary>
+        <div class="answer"><b>Zero-shot.</b> You gave it no worked examples of contract summaries — just the instruction and the document. The moment you paste in one or two example summaries to copy the style from, it becomes few-shot.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 ARCHITECTURE ============ -->
+<section id="arch">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">03</span><h2>Architecture &amp; Training</h2></div>
+    <p class="section-intro">What models are made of and how training actually works under the hood.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The training loop: forward pass, loss function, backpropagation, gradient descent">
+        <defs>
+          <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="#16202C"/>
+          </marker>
+        </defs>
+        <rect x="20" y="70" width="180" height="70" rx="12" fill="#E1EEEC" stroke="#0F6B66" stroke-width="1.5"/>
+        <text x="110" y="99" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#0F6B66">FORWARD PASS</text>
+        <text x="110" y="120" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#16202C">model makes a guess</text>
+
+        <rect x="250" y="70" width="180" height="70" rx="12" fill="#FBF0DC" stroke="#E39B2D" stroke-width="1.5"/>
+        <text x="340" y="99" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#B87A15">LOSS FUNCTION</text>
+        <text x="340" y="120" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#16202C">scores how wrong it was</text>
+
+        <rect x="480" y="70" width="180" height="70" rx="12" fill="#E4ECF7" stroke="#4E7DC4" stroke-width="1.5"/>
+        <text x="570" y="99" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#3D66A8">BACKPROPAGATION</text>
+        <text x="570" y="120" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#16202C">errors flow backwards</text>
+
+        <rect x="710" y="70" width="180" height="70" rx="12" fill="#FFFFFF" stroke="#16202C" stroke-width="1.5"/>
+        <text x="800" y="99" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#16202C">GRADIENT DESCENT</text>
+        <text x="800" y="120" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#16202C">weights nudge downhill</text>
+
+        <line x1="200" y1="105" x2="243" y2="105" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow2)"/>
+        <line x1="430" y1="105" x2="473" y2="105" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow2)"/>
+        <line x1="660" y1="105" x2="703" y2="105" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow2)"/>
+        <path d="M800 140 C 800 195, 110 195, 110 146" fill="none" stroke="#16202C" stroke-width="1.6" stroke-dasharray="5 5" marker-end="url(#arrow2)"/>
+        <text x="455" y="205" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">repeat for every batch, epoch after epoch — parameters improve each cycle</text>
+        <text x="455" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#5A6673">ONE TRAINING STEP</text>
+      </svg>
+      <figcaption>FIG. 2 — HOW MODELS ACTUALLY GET BETTER: THE TRAINING LOOP</figcaption>
+    </figure>
+
+    <div class="terms">
+      <div class="term"><b>Transformer</b><p>The architecture behind ChatGPT, Claude, Gemini. Uses attention to understand context.</p></div>
+      <div class="term"><b>Large Language Model (LLM)</b><p>A neural network trained on massive text to understand and generate language.</p></div>
+      <div class="term"><b>Foundation Model</b><p>A big base model trained on broad data, adaptable to specific jobs.</p></div>
+      <div class="term"><b>Parameters</b><p>The adjustable weights inside a model. More = more capable (and expensive).</p></div>
+      <div class="term"><b>Hyperparameters</b><p>Settings you choose before training: learning rate, batch size, number of layers.</p></div>
+      <div class="term"><b>Training Data</b><p>The dataset used to teach the model. Quality in, quality out.</p></div>
+      <div class="term"><b>Epoch</b><p>One full pass through the entire training dataset.</p></div>
+      <div class="term"><b>Batch Size</b><p>How many examples the model sees before updating its weights.</p></div>
+      <div class="term"><b>Loss Function</b><p>The scorecard. Measures how wrong the model's guess was.</p></div>
+      <div class="term"><b>Gradient Descent</b><p>Adjust weights in the direction that reduces the loss. How models get better.</p></div>
+      <div class="term"><b>Backpropagation</b><p>Errors flow backward through the network so every layer learns from its mistakes.</p></div>
+      <div class="term"><b>Attention</b><p>Lets the model focus on the most relevant parts of the input. The key idea behind transformers.</p></div>
+      <div class="term"><b>Tokenisation</b><p>Chopping text into small pieces the model can process. "Don't" becomes ["Don", "'t"].</p></div>
+    </div>
+    <div class="quiz">
+      <div class="q-label">Test yourself</div>
+      <p class="q">Parameters vs hyperparameters: which ones does the model learn on its own?</p>
+      <details><summary>Show answer</summary>
+        <div class="answer"><b>Parameters.</b> The model adjusts its weights automatically through the training loop above (loss → backprop → gradient descent). <b>Hyperparameters</b> — learning rate, batch size, layer count — are set by humans <i>before</i> training starts and never learned.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 GENERATIVE AI ============ -->
+<section id="genai">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">04</span><h2>Generative AI</h2></div>
+    <p class="section-intro">The category most people interact with today. AI that creates, not just classifies.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Temperature dial from predictable to creative">
+        <path d="M150 170 A 150 150 0 0 1 450 170" fill="none" stroke="#D8DEE4" stroke-width="26" stroke-linecap="round"/>
+        <path d="M150 170 A 150 150 0 0 1 300 20" fill="none" stroke="#0F6B66" stroke-width="26" stroke-linecap="round"/>
+        <path d="M300 20 A 150 150 0 0 1 450 170" fill="none" stroke="#E39B2D" stroke-width="26" stroke-linecap="round"/>
+        <circle cx="300" cy="170" r="8" fill="#16202C"/>
+        <line x1="300" y1="170" x2="392" y2="72" stroke="#16202C" stroke-width="4" stroke-linecap="round"/>
+        <text x="128" y="200" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#0F6B66">LOW (0)</text>
+        <text x="472" y="200" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#B87A15">HIGH (1+)</text>
+        <text x="150" y="105" text-anchor="end" font-family="Public Sans" font-size="12" fill="#5A6673">predictable, safe,</text>
+        <text x="150" y="121" text-anchor="end" font-family="Public Sans" font-size="12" fill="#5A6673">repeatable answers</text>
+        <text x="452" y="105" font-family="Public Sans" font-size="12" fill="#5A6673">random, creative,</text>
+        <text x="452" y="121" font-family="Public Sans" font-size="12" fill="#5A6673">surprising answers</text>
+        <text x="680" y="70" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="#16202C">USE LOW FOR:</text>
+        <text x="680" y="92" font-family="Public Sans" font-size="12" fill="#5A6673">facts · code · extraction</text>
+        <text x="680" y="130" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="#16202C">USE HIGH FOR:</text>
+        <text x="680" y="152" font-family="Public Sans" font-size="12" fill="#5A6673">stories · brainstorms · names</text>
+      </svg>
+      <figcaption>FIG. 3 — TEMPERATURE: THE CREATIVITY DIAL</figcaption>
+    </figure>
+
+    <div class="terms">
+      <div class="term"><b>Generative AI</b><p>AI that creates new content: text, images, audio, video, code.</p></div>
+      <div class="term"><b>Prompt</b><p>The instruction you type to tell the model what to do.</p></div>
+      <div class="term"><b>Token</b><p>A small chunk of text. One word is roughly 1–2 tokens.</p></div>
+      <div class="term"><b>Context Window</b><p>How many tokens the model sees at once. Bigger = more conversation fits.</p></div>
+      <div class="term"><b>Temperature</b><p>The creativity dial. High = random, creative. Low = predictable, safe.</p></div>
+      <div class="term"><b>Inference</b><p>When the model runs and gives you an answer. Training teaches, inference performs.</p></div>
+      <div class="term"><b>Diffusion Model</b><p>Turns noise into images. How DALL-E and Midjourney work.</p></div>
+      <div class="term"><b>Autoregressive Model</b><p>Generates one token at a time, each based on all before it. How ChatGPT writes.</p></div>
+    </div>
+    <div class="quiz">
+      <div class="q-label">Test yourself</div>
+      <p class="q">You want Claude to write a creative story. Temperature high or low?</p>
+      <details><summary>Show answer</summary>
+        <div class="answer"><b>High.</b> A higher temperature makes token choices more varied and surprising — exactly what creative writing needs. Keep it low when you need factual, consistent, or structured output like code or data extraction.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 AGENTS ============ -->
+<section id="agents">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">05</span><h2>AI Agents &amp; Systems</h2></div>
+    <p class="section-intro">When AI stops answering and starts doing.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RAG pipeline: question, retrieve documents, generate grounded answer">
+        <defs>
+          <marker id="arrow3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="#16202C"/>
+          </marker>
+        </defs>
+        <rect x="20" y="60" width="165" height="66" rx="12" fill="#FFFFFF" stroke="#16202C" stroke-width="1.5"/>
+        <text x="102" y="88" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="#16202C">QUESTION</text>
+        <text x="102" y="108" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">"What's our leave policy?"</text>
+
+        <rect x="245" y="60" width="165" height="66" rx="12" fill="#E4ECF7" stroke="#4E7DC4" stroke-width="1.5"/>
+        <text x="327" y="88" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="#3D66A8">RETRIEVE</text>
+        <text x="327" y="108" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">search real documents</text>
+        <rect x="270" y="18" width="30" height="34" rx="4" fill="#FFFFFF" stroke="#4E7DC4"/>
+        <rect x="312" y="14" width="30" height="38" rx="4" fill="#FFFFFF" stroke="#4E7DC4"/>
+        <rect x="354" y="18" width="30" height="34" rx="4" fill="#FFFFFF" stroke="#4E7DC4"/>
+        <line x1="327" y1="54" x2="327" y2="58" stroke="#4E7DC4"/>
+
+        <rect x="470" y="60" width="165" height="66" rx="12" fill="#E1EEEC" stroke="#0F6B66" stroke-width="1.5"/>
+        <text x="552" y="88" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="#0F6B66">LLM + CONTEXT</text>
+        <text x="552" y="108" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">answers from retrieved facts</text>
+
+        <rect x="695" y="60" width="185" height="66" rx="12" fill="#FBF0DC" stroke="#E39B2D" stroke-width="1.5"/>
+        <text x="787" y="88" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="#B87A15">GROUNDED ANSWER</text>
+        <text x="787" y="108" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">with sources, less hallucination</text>
+
+        <line x1="185" y1="93" x2="238" y2="93" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow3)"/>
+        <line x1="410" y1="93" x2="463" y2="93" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow3)"/>
+        <line x1="635" y1="93" x2="688" y2="93" stroke="#16202C" stroke-width="1.6" marker-end="url(#arrow3)"/>
+        <text x="450" y="168" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">RAG = Retrieval-Augmented Generation: look things up first, then answer</text>
+      </svg>
+      <figcaption>FIG. 4 — RAG: WHY GROUNDED AI HALLUCINATES LESS</figcaption>
+    </figure>
+
+    <div class="terms">
+      <div class="term"><b>AI Agent</b><p>A system that sees, thinks, and acts on its own toward a goal.</p></div>
+      <div class="term"><b>Agentic AI</b><p>AI that plans multi-step tasks, picks tools, executes independently.</p></div>
+      <div class="term"><b>Tool Use</b><p>AI calling external tools (search, calculator, APIs) to get the job done.</p></div>
+      <div class="term"><b>Chain-of-Thought (CoT)</b><p>Prompting the model to think step by step instead of jumping to the answer.</p></div>
+      <div class="term"><b>RAG</b><p>Retrieval-Augmented Generation. Searches real documents before answering to stay grounded.</p></div>
+      <div class="term"><b>MCP</b><p>Model Context Protocol. Open standard letting AI plug into external tools and data.</p></div>
+    </div>
+    <div class="quiz">
+      <div class="q-label">Test yourself</div>
+      <p class="q">What separates an AI agent from a chatbot?</p>
+      <details><summary>Show answer</summary>
+        <div class="answer"><b>Action and autonomy.</b> A chatbot responds when you talk to it — one message in, one answer out. An agent pursues a goal: it plans multiple steps, picks and calls tools (search, APIs, code), checks its own results, and keeps going without you prompting each step.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 NLP ============ -->
+<section id="nlp">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">06</span><h2>NLP &amp; Language</h2></div>
+    <p class="section-intro">Teaching machines to work with human language — by turning words into geometry.</p>
+    <div class="terms">
+      <div class="term"><b>NLP</b><p>Natural Language Processing. Teaching machines to understand human language.</p></div>
+      <div class="term"><b>Embedding</b><p>Turning text into numbers so the model can do maths on meaning.</p></div>
+      <div class="term"><b>Semantic Search</b><p>Search by meaning, not exact words. "Affordable car" finds "budget vehicles".</p></div>
+      <div class="term"><b>Tokenization</b><p>Splitting text into tokens the model can process.</p></div>
+      <div class="term"><b>Attention Mechanism</b><p>How the model decides which parts of the input matter most.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 VISION ============ -->
+<section id="vision">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">07</span><h2>Vision &amp; Multimodal</h2></div>
+    <p class="section-intro">Teaching AI to see — and to handle text, images, and audio in one model.</p>
+    <div class="terms">
+      <div class="term"><b>Computer Vision</b><p>Teaching AI to see and understand images.</p></div>
+      <div class="term"><b>Multimodal AI</b><p>Text, images, and audio all at once. Claude reading a screenshot is multimodal.</p></div>
+      <div class="term"><b>OCR</b><p>Optical Character Recognition. Photo of text becomes editable text.</p></div>
+      <div class="term"><b>Image Segmentation</b><p>Splitting an image into separate objects or regions.</p></div>
+      <div class="term"><b>Object Detection</b><p>Finding and labelling things inside an image.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 WHAT CAN GO WRONG ============ -->
+<section id="wrong">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">08</span><h2>What Can Go Wrong</h2></div>
+    <p class="section-intro">The failure modes. Knowing these makes you a sharper user.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overfitting versus underfitting versus good fit">
+        <!-- Underfit -->
+        <rect x="20" y="20" width="270" height="160" rx="12" fill="#FFFFFF" stroke="#D8DEE4"/>
+        <text x="155" y="46" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#B87A15">UNDERFITTING</text>
+        <circle cx="60" cy="140" r="4" fill="#5A6673"/><circle cx="95" cy="105" r="4" fill="#5A6673"/><circle cx="130" cy="120" r="4" fill="#5A6673"/><circle cx="165" cy="85" r="4" fill="#5A6673"/><circle cx="200" cy="100" r="4" fill="#5A6673"/><circle cx="235" cy="70" r="4" fill="#5A6673"/>
+        <line x1="50" y1="150" x2="250" y2="130" stroke="#E39B2D" stroke-width="2.5"/>
+        <text x="155" y="170" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#5A6673">too simple — misses the pattern</text>
+        <!-- Good fit -->
+        <rect x="315" y="20" width="270" height="160" rx="12" fill="#E1EEEC" stroke="#0F6B66"/>
+        <text x="450" y="46" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#0F6B66">GOOD FIT</text>
+        <circle cx="355" cy="140" r="4" fill="#5A6673"/><circle cx="390" cy="105" r="4" fill="#5A6673"/><circle cx="425" cy="120" r="4" fill="#5A6673"/><circle cx="460" cy="85" r="4" fill="#5A6673"/><circle cx="495" cy="100" r="4" fill="#5A6673"/><circle cx="530" cy="70" r="4" fill="#5A6673"/>
+        <path d="M345 148 C 400 110, 430 125, 470 88 C 500 105, 520 85, 545 68" fill="none" stroke="#0F6B66" stroke-width="2.5"/>
+        <text x="450" y="170" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#38524F">learns the trend, ignores the noise</text>
+        <!-- Overfit -->
+        <rect x="610" y="20" width="270" height="160" rx="12" fill="#FFFFFF" stroke="#D8DEE4"/>
+        <text x="745" y="46" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" font-weight="600" fill="#B23A3A">OVERFITTING</text>
+        <circle cx="650" cy="140" r="4" fill="#5A6673"/><circle cx="685" cy="105" r="4" fill="#5A6673"/><circle cx="720" cy="120" r="4" fill="#5A6673"/><circle cx="755" cy="85" r="4" fill="#5A6673"/><circle cx="790" cy="100" r="4" fill="#5A6673"/><circle cx="825" cy="70" r="4" fill="#5A6673"/>
+        <path d="M640 150 L650 140 L668 128 L685 105 L700 132 L720 120 L738 96 L755 85 L772 112 L790 100 L808 82 L825 70" fill="none" stroke="#B23A3A" stroke-width="2.5"/>
+        <text x="745" y="170" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#5A6673">memorised every point — fails on new data</text>
+        <text x="450" y="208" text-anchor="middle" font-family="Public Sans" font-size="11.5" fill="#5A6673">same data, three models — only the middle one generalises</text>
+      </svg>
+      <figcaption>FIG. 5 — UNDERFITTING vs GOOD FIT vs OVERFITTING</figcaption>
+    </figure>
+
+    <div class="terms">
+      <div class="term"><b>Hallucination</b><p>Makes something up and presents it as fact. Sounds confident, completely wrong.</p></div>
+      <div class="term"><b>Overfitting</b><p>Memorised training data so well it cannot handle anything new.</p></div>
+      <div class="term"><b>Underfitting</b><p>Too simple to learn the patterns.</p></div>
+      <div class="term"><b>Bias</b><p>Systematic unfairness from training data or design choices.</p></div>
+      <div class="term"><b>Alignment</b><p>Making sure AI does what humans actually want.</p></div>
+      <div class="term"><b>Jailbreaking</b><p>Tricking a model into ignoring its safety rules.</p></div>
+      <div class="term"><b>Prompt Injection</b><p>Sneaking instructions into input data to hijack the model.</p></div>
+      <div class="term"><b>Ground Truth</b><p>The verified correct answer you compare the model against.</p></div>
+    </div>
+    <div class="quiz">
+      <div class="q-label">Test yourself</div>
+      <p class="q">Claude cites a paper that does not exist. Hallucination, bias, or prompt injection?</p>
+      <details><summary>Show answer</summary>
+        <div class="answer"><b>Hallucination.</b> The model fabricated a plausible-sounding source and presented it as fact. Bias would be systematic unfairness; prompt injection would require hidden instructions smuggled into the input. Neither is happening here.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 EVALUATION ============ -->
+<section id="eval">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">09</span><h2>Evaluation &amp; Metrics</h2></div>
+    <p class="section-intro">How you score a model. Is it actually good or just looks good?</p>
+
+    <figure>
+      <svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Precision versus recall illustrated with spam filter example">
+        <text x="230" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#0F6B66">PRECISION</text>
+        <text x="230" y="54" text-anchor="middle" font-family="Public Sans" font-size="12" fill="#5A6673">of everything flagged "spam", how much really was?</text>
+        <rect x="110" y="75" width="240" height="110" rx="12" fill="#E1EEEC" stroke="#0F6B66" stroke-dasharray="5 4"/>
+        <text x="230" y="98" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#38524F">flagged as spam</text>
+        <circle cx="160" cy="130" r="11" fill="#0F6B66"/><circle cx="195" cy="155" r="11" fill="#0F6B66"/><circle cx="230" cy="128" r="11" fill="#0F6B66"/><circle cx="265" cy="155" r="11" fill="#0F6B66"/>
+        <circle cx="305" cy="132" r="11" fill="#FFFFFF" stroke="#B23A3A" stroke-width="2.5"/>
+        <text x="230" y="215" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="#16202C">4 of 5 correct → 80%</text>
+        <text x="230" y="236" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#5A6673">low precision = false alarms</text>
+
+        <text x="670" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600" fill="#3D66A8">RECALL</text>
+        <text x="670" y="54" text-anchor="middle" font-family="Public Sans" font-size="12" fill="#5A6673">of all real spam that existed, how much did we catch?</text>
+        <rect x="550" y="75" width="240" height="110" rx="12" fill="#E4ECF7" stroke="#4E7DC4" stroke-dasharray="5 4"/>
+        <text x="670" y="98" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#3D66A8">all real spam</text>
+        <circle cx="600" cy="130" r="11" fill="#4E7DC4"/><circle cx="635" cy="155" r="11" fill="#4E7DC4"/><circle cx="670" cy="128" r="11" fill="#4E7DC4"/><circle cx="705" cy="155" r="11" fill="#4E7DC4"/>
+        <circle cx="745" cy="132" r="11" fill="#FFFFFF" stroke="#B23A3A" stroke-width="2.5"/>
+        <circle cx="742" cy="160" r="11" fill="#FFFFFF" stroke="#B23A3A" stroke-width="2.5"/>
+        <text x="670" y="215" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="#16202C">4 of 6 caught → 67%</text>
+        <text x="670" y="236" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#5A6673">low recall = misses slip through</text>
+      </svg>
+      <figcaption>FIG. 6 — PRECISION vs RECALL (F1 SCORE BALANCES BOTH)</figcaption>
+    </figure>
+
+    <div class="terms">
+      <div class="term"><b>Benchmark</b><p>A standardised test to compare models. Like an exam everyone sits.</p></div>
+      <div class="term"><b>Accuracy</b><p>How many answers the model got right out of all answers.</p></div>
+      <div class="term"><b>Precision</b><p>When the model says "yes", how often is it actually right?</p></div>
+      <div class="term"><b>Recall</b><p>Of all actual positives, how many did the model catch?</p></div>
+      <div class="term"><b>F1 Score</b><p>Precision and recall balanced into one number.</p></div>
+      <div class="term"><b>Perplexity</b><p>How surprised the model is by the next word. Lower = understands language better.</p></div>
+      <div class="term"><b>BLEU Score</b><p>Scores generated text against a human-written reference.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 SAFETY ============ -->
+<section id="safety">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">10</span><h2>Safety &amp; Ethics</h2></div>
+    <p class="section-intro">Keeping AI understandable, testable, and accountable.</p>
+    <div class="terms">
+      <div class="term"><b>Explainable AI (XAI)</b><p>Understanding why the model made a decision.</p></div>
+      <div class="term"><b>Red Teaming</b><p>Deliberately breaking the model to find weaknesses before users do.</p></div>
+      <div class="term"><b>Constitutional AI</b><p>Training with a set of principles the model must follow.</p></div>
+      <div class="term"><b>Guardrails</b><p>Hard limits on what the model can and cannot output.</p></div>
+      <div class="term"><b>Data Privacy</b><p>Protecting personal information in training and inference.</p></div>
+      <div class="term"><b>Model Card</b><p>A fact sheet: what it can do, what it cannot, how it was trained.</p></div>
+      <div class="term"><b>Watermarking</b><p>Hidden markers so you can tell if something was AI-generated.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 INFRASTRUCTURE ============ -->
+<section id="infra">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">11</span><h2>Infrastructure &amp; Deployment</h2></div>
+    <p class="section-intro">The plumbing. How models run, get faster, and what hardware powers them.</p>
+    <div class="terms">
+      <div class="term"><b>API</b><p>A way for your code to talk to an AI model. Question in, answer back.</p></div>
+      <div class="term"><b>Latency</b><p>Time between pressing enter and getting a response.</p></div>
+      <div class="term"><b>Throughput</b><p>How many requests the system handles at once.</p></div>
+      <div class="term"><b>GPU</b><p>The chip behind AI training. Originally for graphics, now the engine behind every major model.</p></div>
+      <div class="term"><b>TPU</b><p>Google's custom chip for AI workloads.</p></div>
+      <div class="term"><b>Quantization</b><p>Shrink the model by reducing number precision. Faster, cheaper, slightly less accurate.</p></div>
+      <div class="term"><b>Distillation</b><p>A big model teaches a small model. Student keeps most ability at a fraction of the cost.</p></div>
+      <div class="term"><b>Edge AI</b><p>Running AI on your device instead of in the cloud.</p></div>
+      <div class="term"><b>Synthetic Data</b><p>Fake data generated by AI to train other AI.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 ADVANCED ============ -->
+<section id="advanced">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">12</span><h2>Advanced Concepts</h2></div>
+    <p class="section-intro">The frontier. Research papers, product launches, and debates about where AI is heading.</p>
+
+    <figure>
+      <svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Scaling laws and emergent abilities: capability grows with scale, new skills appear at thresholds">
+        <line x1="80" y1="190" x2="840" y2="190" stroke="#16202C" stroke-width="1.5"/>
+        <line x1="80" y1="190" x2="80" y2="30" stroke="#16202C" stroke-width="1.5"/>
+        <text x="460" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#5A6673">MODEL SCALE (data + compute + parameters) →</text>
+        <text x="52" y="115" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#5A6673" transform="rotate(-90 52 115)">CAPABILITY →</text>
+        <path d="M90 182 C 260 172, 420 150, 560 110 C 680 76, 770 52, 830 40" fill="none" stroke="#0F6B66" stroke-width="3"/>
+        <circle cx="400" cy="155" r="7" fill="#E39B2D"/>
+        <circle cx="580" cy="103" r="7" fill="#E39B2D"/>
+        <circle cx="730" cy="61" r="7" fill="#E39B2D"/>
+        <text x="400" y="135" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#B87A15">arithmetic appears</text>
+        <text x="580" y="83" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#B87A15">code debugging appears</text>
+        <text x="730" y="41" text-anchor="middle" font-family="Public Sans" font-size="11" fill="#B87A15">multi-step reasoning appears</text>
+        <text x="190" y="60" font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#0F6B66">SCALING LAWS: the curve is predictable…</text>
+        <text x="190" y="80" font-family="Public Sans" font-size="11.5" fill="#5A6673">…but ● emergent abilities appear at thresholds nobody programmed</text>
+      </svg>
+      <figcaption>FIG. 7 — SCALING LAWS &amp; EMERGENT ABILITIES</figcaption>
+    </figure>
+
+    <div class="terms">
+      <div class="term"><b>Latent Space</b><p>A compressed map where the model stores meaning. Similar things sit close together.</p></div>
+      <div class="term"><b>Emergent Abilities</b><p>Skills that appear when a model gets big enough. Nobody programmed them in.</p></div>
+      <div class="term"><b>Scaling Laws</b><p>More data + more compute + bigger model = better results. Predictably.</p></div>
+      <div class="term"><b>In-Context Learning</b><p>Model learns from examples in the prompt. No retraining needed.</p></div>
+      <div class="term"><b>Mixture of Experts (MoE)</b><p>One big model, many specialists inside. Only relevant experts activate per query.</p></div>
+      <div class="term"><b>AGI</b><p>Artificial General Intelligence. Hypothetical AI as smart as a human across every domain. Does not exist yet.</p></div>
+      <div class="term"><b>ASI</b><p>Artificial Superintelligence. AI smarter than all humans combined. Theoretical.</p></div>
+    </div>
+    <div class="quiz">
+      <div class="q-label">Test yourself</div>
+      <p class="q">GPT-4 does maths, writes poetry, debugs code. Nobody trained it for each one. What is that?</p>
+      <details><summary>Show answer</summary>
+        <div class="answer"><b>Emergent abilities.</b> These skills weren't individually programmed or trained — they appeared once the model crossed a scale threshold (see the orange dots in Fig. 7). It's the surprising flip side of the otherwise-predictable scaling laws.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--ink)">How to use this guide:</strong> read one chapter a day, attempt the "Test yourself" question before revealing the answer, and revisit the seven figures — the nested circles, the training loop, and the precision/recall boxes cover the ideas people most often mix up.</p>
+  </div>
+</footer>
+
+</body>
+</html>
